@@ -21,7 +21,7 @@ namespace PumpLog.Generic.Helper
 
         public static void Initialize(IConfiguration config)
         {
-            ConnectionString = config.GetConnectionString("DefaultConnection");
+            ConnectionString = config.GetConnectionString("DataAccessConnection");
             SecretKey = config["AppSettings:Secret"];
         }
         public static IDbConnection Connection
@@ -39,7 +39,7 @@ namespace PumpLog.Generic.Helper
             dynamic response = GetUserDetails<T>(Email: request.Email);
             if (response == null)
             {
-                return null;
+                return null!;
             }
             else if (response.Name.ToUpper().Equals("USERNOTREGISTER") || response.Name.ToUpper().Equals("DELETED"))
             {
@@ -48,10 +48,10 @@ namespace PumpLog.Generic.Helper
             else
             {
                 if (!VerifyPasswordHash(request.Password, response.PasswordHash, response.PasswordSalt))
-                    return null;
+                    return null!;
 
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var key = Encoding.ASCII.GetBytes(SecretKey);
+                var key = Encoding.ASCII.GetBytes(SecretKey!);
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[]
@@ -91,7 +91,7 @@ namespace PumpLog.Generic.Helper
                 }, commandType: CommandType.StoredProcedure);
             }
 
-            return response;
+            return response!;
         }
 
         public static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
