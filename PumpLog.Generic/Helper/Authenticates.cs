@@ -59,7 +59,7 @@ namespace PumpLog.Generic.Helper
                           new Claim(ClaimTypes.Name , response.UserId ), new Claim(ClaimTypes.Role, response.Role), new Claim(ClaimTypes.Email, response.Email)
                     }
                     ),
-                    Expires = DateTime.UtcNow.AddDays(1),
+                    Expires = DateTime.UtcNow.AddMinutes(10),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
                 var token = tokenHandler.CreateToken(tokenDescriptor);
