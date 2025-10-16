@@ -70,7 +70,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddSwaggerGen(setup =>
 {
     //setup.EnableAnnotations();
-    setup.SwaggerDoc("v1", new OpenApiInfo { Title = "EmployeeManagement.API", Version = "v1" });
+    setup.SwaggerDoc("v1", new OpenApiInfo { Title = "PumpLog.API", Version = "v1" });
     var jwtSecurityScheme = new OpenApiSecurityScheme
     {
         Scheme = "bearer",
