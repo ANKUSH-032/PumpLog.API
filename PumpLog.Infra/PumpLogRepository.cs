@@ -46,7 +46,7 @@ namespace PumpLog.Infra
                 fillingInsertDto.VehicleNumber,
                 fillingInsertDto.PaymentMode,
                 fillingInsertDto.CreatedBy,
-                PaymentProof =fillingInsertDto.PaymentProofPath
+                fillingInsertDto.PaymentProofPath
 
             }, commandType: CommandType.StoredProcedure).ConfigureAwait(false);
 
