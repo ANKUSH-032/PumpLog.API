@@ -32,22 +32,21 @@ namespace PumpLog.API.Controllers
                     if (!allowedExt.Contains(ext))
                         return BadRequest("Invalid file type. Only .jpg, .png, .pdf allowed.");
 
-                    // Build local path
+                  
                     var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "payments");
                     if (!Directory.Exists(uploadsDir))
                         Directory.CreateDirectory(uploadsDir);
 
-                    // Unique filename
+                  
                     var fileName = $"payment_{Guid.NewGuid()}{ext}";
                     var fullPath = Path.Combine(uploadsDir, fileName);
 
-                    // Save file locally
+                 
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         await fillingInsertDto.PaymentProof.CopyToAsync(stream);
                     }
 
-                    // Build file URL (this will be returned & saved to DB)
                     var baseUrl = $"{Request.Scheme}://{Request.Host}";
                     filePath = $"{baseUrl}/uploads/payments/{fileName}";
                     fillingInsertDto.PaymentProofPath = fileName;
@@ -97,20 +96,20 @@ namespace PumpLog.API.Controllers
             if (string.IsNullOrEmpty(fileName))
                 return BadRequest("File name is required.");
 
-            // Build the physical path
+          
             var filePath = Path.Combine(_env.WebRootPath, "uploads", "payments", fileName);
 
             if (!System.IO.File.Exists(filePath))
                 return NotFound("File not found.");
 
-            // Get content type based on extension
+         
             var contentType = GetContentType(filePath);
 
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             return File(fileBytes, contentType, fileName);
         }
 
-        // Helper method to determine content type
+       
         private string GetContentType(string path)
         {
             var ext = Path.GetExtension(path).ToLowerInvariant();
