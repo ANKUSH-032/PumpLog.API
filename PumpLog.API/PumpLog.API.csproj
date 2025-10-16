@@ -21,4 +21,8 @@
     <ProjectReference Include="..\PumpLog.Infra\PumpLog.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\payments\" />
+  </ItemGroup>
+
 </Project>
