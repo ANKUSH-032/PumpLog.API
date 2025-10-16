@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using PumpLog.Core.Auth;
+using PumpLog.Core.comman;
 using PumpLog.Core.PumpLog;
 using PumpLog.Generic.Helper;
 using PumpLog.Infra;
@@ -95,6 +96,7 @@ builder.Services.AddSwaggerGen(setup =>
 });
 builder.Services.AddScoped<IPumpLogRepository, PumpLogRepository>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<ICommonRepository, CommonRepository>();
 
 var app = builder.Build();
 

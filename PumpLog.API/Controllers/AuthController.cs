@@ -72,7 +72,7 @@ namespace PumpLog.API.Controllers
 
                 return Ok(new { Status = true, Message = "Success", Userdetails = user });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, MessageHelper.message);
             }

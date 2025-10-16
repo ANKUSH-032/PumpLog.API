@@ -27,4 +27,14 @@ namespace PumpLog.Core.comman
         public int? PageSize { get; set; }
         public string? SortCol { get; set; }// = string.Empty;
     }
+    public class MasterListParams
+    {
+        public string? Type { get; set; }
+    }
+    public class MasterList
+    {
+        public object? ID { get; set; }
+        public string? Value { get; set; }
+    }
+
 }
